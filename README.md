@@ -1,6 +1,6 @@
 # Explicador Económico del Perú
 
-Pipeline en Python que descarga indicadores económicos reales del Perú (tipo de cambio, inflación, tasa de referencia del BCRP, y precio del cobre), los guarda en PostgreSQL con un modelo de datos tipo estrella, y arma un resumen diario con las variaciones respecto al dato anterior.
+Pipeline en Python que descarga indicadores económicos reales del Perú (tipo de cambio, inflación, tasa de referencia del BCRP, y precio del cobre), los guarda en PostgreSQL con un modelo de datos tipo estrella, y arma un resumen diario con las variaciones, un forecast simple y alertas de valores atípicos.
 
 Lo armé para tener un proyecto propio de Data Engineering con datos reales en vez de un dataset de tutorial: pipeline orquestado con Prefect, tests contra una base de datos real, y CI en GitHub Actions.
 
@@ -68,6 +68,14 @@ Esto abre un proceso que dispara el flow según el cron — pensado para un serv
 ## CI
 
 `.github/workflows/test.yml` corre toda la suite de tests en cada push, levantando su propio Postgres como servicio del runner (no depende de tener Docker en el CI).
+
+## Análisis
+
+Después de cargar los datos, el pipeline calcula tres cosas más (`src/analysis.py`), usando solo el módulo `statistics` de la librería estándar de Python:
+
+- **Forecast simple:** regresión lineal sobre el histórico de cada indicador para estimar el próximo valor y su tendencia.
+- **Detección de anomalías:** compara el último valor contra la media y desviación estándar del resto de la serie (z-score). Si el histórico no tiene varianza (por ejemplo, una tasa que estuvo fija varios meses), lo reporta como no evaluable en vez de forzar una respuesta.
+- **Correlación:** entre el tipo de cambio y el precio del cobre. Perú es un exportador grande de cobre, así que hay una relación económica real detrás de ese número, no es arbitrario.
 
 ## Modelo de datos
 
