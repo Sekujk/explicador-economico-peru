@@ -77,12 +77,3 @@ fact_valor    (id, indicador_id -> dim_indicador.id, fecha, valor)   UNIQUE(indi
 ```
 
 Esquema tipo estrella: una tabla de dimensión (qué indicador es) y una de hechos (su valor en el tiempo), para poder sumar más indicadores sin tocar la estructura.
-
-## Qué sigue
-
-- Correlación entre indicadores, forecast simple, detección de anomalías.
-- API en FastAPI y una página en mi portafolio web que la consuma.
-
-## Convención de commits
-
-[Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`, `ci:`.
