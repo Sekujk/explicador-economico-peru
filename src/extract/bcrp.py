@@ -20,7 +20,7 @@ _BASE_URL = "https://estadisticas.bcrp.gob.pe/estadisticas/series/api"
 
 _MESES = {
     "Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
-    "Jul": 7, "Ago": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12,
+    "Jul": 7, "Ago": 8, "Sep": 9, "Set": 9, "Oct": 10, "Nov": 11, "Dic": 12,
 }
 
 
