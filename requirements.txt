@@ -1,0 +1,8 @@
+requests==2.32.3
+pandas==2.2.3
+SQLAlchemy==2.0.36
+psycopg2-binary==2.9.10
+yfinance==1.5.2
+python-dotenv==1.0.1
+prefect==3.8.2
+pytest==8.3.4

@@ -1,0 +1,24 @@
+name: Actualizar datos
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Correr el pipeline contra Supabase
+        run: python -m src.main
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
