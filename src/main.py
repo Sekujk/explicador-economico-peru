@@ -72,7 +72,9 @@ def _linea_analisis(nombre: str, unidad: str, puntos: list[tuple[date, float]]) 
     )
 
 
-@task(name="extraer", retries=3, retry_delay_seconds=30, log_prints=True)
+# El BCRP a veces responde vacio durante varios minutos (pasó el 2026-10-04: las 4 pruebas, separadas
+# por 30 s, fallaron con JSONDecodeError). Con esperas crecientes se cubre una caida de ~8 minutos.
+@task(name="extraer", retries=3, retry_delay_seconds=[30, 120, 300], log_prints=True)
 def extraer(indicador: Indicador) -> list[tuple[date, float]]:
     fecha_inicio, fecha_fin = _rango_para(indicador.frecuencia)
 
