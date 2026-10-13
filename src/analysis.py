@@ -70,7 +70,7 @@ def detectar_anomalia(puntos: list[tuple[date, float]], umbral_desviaciones: flo
         # El histórico no varió nada (ej. una tasa que estuvo fija varios meses):
         # el z-score no está definido (división por cero). No se puede afirmar
         # de forma estadísticamente honesta si el valor nuevo es "anómalo" o no
-        # con una muestra sin varianza — se reporta como no evaluable, no como False.
+        # con una muestra sin varianza, se reporta como no evaluable, no como False.
         return {"es_anomalia": False, "z_score": None}
 
     z_score = (ultimo - media) / desviacion

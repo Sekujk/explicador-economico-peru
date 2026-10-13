@@ -63,7 +63,7 @@ if __name__ == "__main__":
     run.serve(name="explicador-economico-diario", cron="0 8 * * *")
 ```
 
-Esto abre un proceso que dispara el flow según el cron — pensado para un servidor, no para dejarlo abierto en una laptop.
+Esto abre un proceso que dispara el flow según el cron, pensado para un servidor, no para dejarlo abierto en una laptop.
 
 ## CI
 

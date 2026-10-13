@@ -32,4 +32,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue create             --title "Fallo la actualizacion programada ($(date -u +%F))"             --body "La ejecucion termino con error: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          gh issue create --title "Fallo la actualizacion programada ($(date -u +%F))" --body "La ejecucion termino con error: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
