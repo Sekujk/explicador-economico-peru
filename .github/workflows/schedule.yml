@@ -5,6 +5,10 @@ on:
     - cron: "0 8 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -22,3 +26,10 @@ jobs:
         run: python -m src.main
         env:
           DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+
+      - name: Abrir un issue si fallo
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create             --title "Fallo la actualizacion programada ($(date -u +%F))"             --body "La ejecucion termino con error: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
